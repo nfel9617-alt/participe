@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> نادي طموح </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0f4c81;     /* اللون الأزرق الرسمي للنادي */
+            --creative-purple: #6f42c1;  /* اللون الإبداعي لقطاع البودكاست */
+            --accent-orange: #ff9800;    /* لون التنبيهات المستوحى من شارة الصالون */
+            --dark-neutral: #2b3a4a;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-neutral);
+            line-height: 1.6;
+        }
+
+        /* --- الهيدر ورأس الصفحة --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-blue), #072642);
+            color: var(--white);
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+            border-bottom: 5px solid var(--accent-orange);
+        }
+
+        .summit-tag {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+
+        header .slogan {
+            font-size: 1.25rem;
+            font-style: italic;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- الحاوية والتنسيق العام --- */
+        .container {
+            max-width: 1200px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .main-title {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            border-bottom: 3px solid #eef2f5;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* --- قسم حول النادي والإحصائيات --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            text-align: justify;
+            color: #4a5568;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .stat-box {
+            background: #f1f5f9;
+            padding: 20px 10px;
+            border-radius: 12px;
+            text-align: center;
+            border-bottom: 4px solid var(--primary-blue);
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        /* --- قسم عرض الحلقات (البودكاست) --- */
+        .podcast-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .video-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-desc {
+            padding: 20px;
+        }
+
+        .video-desc .badge-lang {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* --- قسم هيكل الفريق الكامل --- */
+        .category-subtitle {
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            padding-right: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .title-blue { color: var(--primary-blue); border-right: 4px solid var(--primary-blue); }
+        .title-creative { color: var(--creative-purple); border-right: 4px solid var(--creative-purple); }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .team-card {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .blue-tier { border-top: 4px solid var(--primary-blue); }
+        .creative-tier { border-top: 4px solid var(--creative-purple); }
+
+        /* حل ذكي ومميز لعرض الصور الشخصية عبر أيقونات منسقة مسبقاً تفادياً لمشاكل التحميل */
+        .avatar-placeholder {
+            width: 70px;
+            height: 70px;
+            background: #f1f5f9;
+            color: #94a3b8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.8rem;
+        }
+        .blue-tier .avatar-placeholder { color: var(--primary-blue); background: #e0f2fe; }
+        .creative-tier .avatar-placeholder { color: var(--creative-purple); background: #f3e8ff; }
+
+        .team-card h3 {
+            font-size: 1.1rem;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .team-card p {
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .team-card .sub-role {
+            display: inline-block;
+            font-size: 0.8rem;
+            background: #f8fafc;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-top: 6px;
+            color: #475569;
+            border: 1px dashed #cbd5e1;
+        }
+
+        /* --- قسم معلومات الاتصال الرسمية --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .contact-item {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #edf2f7;
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+        }
+
+        /* --- الفوتر --- */
+        footer {
+            background: #1e293b;
+            color: var(--white);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        footer .footer-slogan {
+            opacity: 0.8;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        /* متجاوب مع الهواتف */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 20px; }
+            .section-card { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="summit-tag"><i class="fas fa-certificate"></i> عارض مشارك في صالون التشغيل والمقاولتية | قصر الثقافة</span>
+        <h1>نادي طموح - Tomouh Club</h1>
+        <p class="slogan">"دعونا نكون البداية.. وليكن طموحنا قصة نجاح"</p>
+    </header>
+
+    <div class="container">
+
+        <div class="section-card">
+            <h2 class="main-title"><i class="fas fa-building-university"></i> بطاقة تعريفية بالمبادرة</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    تأسس <strong>نادي طموح</strong> في المقر الرسمي بالمركز الترفيهي العلمي بولاية سيدي بلعباس (طريق معسكر). يهتم النادي بتنظيم المنتديات الكبرى وإضافة لمسات تقنية ومقاولاتية مبتكرة. يعتبر النادي المؤسس الرسمي لـ <strong>" بودكاست طموح"</strong> الموجه خصيصاً لمرافقة وتوجيه طلاب البكالوريا والشباب الجامعي. بُني النادي بأيدي شبابية نخبوية من الطلبة الجامعيين المتفوقين القادمين من مختلف ولايات الوطن والذين آمنوا برؤية موحدة لصناعة التغيير.
+                </div>
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <span class="stat-number">3+</span>
+                        <span class="stat-label">فعاليات كبرى منظمة</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">15</span>
+                        <span class="stat-label"> رئيس فوج  </span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">24</span>
+                        <span class="stat-label">عضو تنظيمي فعال</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2 class="main-title"><i class="fas fa-play-circle"></i> معرض أعمال طموح بودكاست</h2>
+            <div class="podcast-grid">
+                
+                <div class="video-card">
+                    <div class="video-responsive">
+                        <iframe src="https://www.youtube.com/embed/d3-b7bgmxJ8" title="French Podcast Episode" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-desc">
+                        <span class="badge-lang" style="background:#e0f2fe; color:#0369a1;">النسخة الفرنسية</span>
+                        <h4>توجيهات ونصائح في وحدة النص التاريخي بكالوريا باللغة الفرنسية</h4>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-responsive">
+                        <iframe src="https://www.youtube.com/embed/OqmdLIon9F8" title="Civil Engineering Episode" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-desc">
+                        <span class="badge-lang" style="background:#fef3c7; color:#b45309;">استضافة خبراء</span>
+                        <h4>جلسة حوارية مع أستاذة الهندسة المدنية</h4>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-responsive">
+                        <iframe src="https://www.youtube.com/embed/kyRjXYdffzY" title="English Podcast Episode" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-desc">
+                        <span class="badge-lang" style="background:#dcfce7; color:#15803d;">النسخة الإنجليزية</span>
+                        <h4> حلقة في وحدة أخلاقيات العمل للبكالوريا باللغة الإنجليزية</h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2 class="main-title"><i class="fas fa-users-gear"></i> الهيكل التنظيمي وأعضاء النادي</h2>
+            
+            <h3 class="category-subtitle title-blue"><i class="fas fa-user-shield"></i> الإدارة العليا</h3>
+            <div class="team-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); justify-content: center;">
+                <div class="team-card blue-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-user-tie"></i></div>
+                    <h3>F. Noufel</h3>
+                    <p>إدارة النادي العام</p>
+                    <span class="sub-role">Club Manager</span>
+                </div>
+            </div>
+
+            <h3 class="category-subtitle title-blue"><i class="fas fa-laptop-code"></i> الفرع التقني والمراقبة والإشراف</h3>
+            <div class="team-grid">
+                <div class="team-card blue-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-code"></i></div>
+                    <h3>M. Sohaib Abdeljalil</h3>
+                    <p>Technical Branch</p>
+                    <span class="sub-role">Technical Lead</span>
+                </div>
+                <div class="team-card blue-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-palette"></i></div>
+                    <h3>B. Hossam</h3>
+                    <p>Design & Photography</p>
+                    <span class="sub-role">Head of Both Departments</span>
+                </div>
+                <div class="team-card blue-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-vector-square"></i></div>
+                    <h3>H. Wahab</h3>
+                    <p>Design Department</p>
+                    <span class="sub-role">Deputy Head</span>
+                </div>
+                <div class="team-card blue-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-photo-film"></i></div>
+                    <h3>B. Rania</h3>
+                    <p>Media & Editing</p>
+                    <span class="sub-role">Head of Both Departments</span>
+                </div>
+                <div class="team-card blue-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-film"></i></div>
+                    <h3>F. Yacine</h3>
+                    <p>Video Editing</p>
+                    <span class="sub-role">Deputy Head of Editing</span>
+                </div>
+                <div class="team-card blue-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-chart-pie"></i></div>
+                    <h3>D. Wissam</h3>
+                    <p>Basic Monitoring & Eval.</p>
+                    <span class="sub-role">Main Lead</span>
+                </div>
+                <div class="team-card blue-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h3>H. Abdeslam</h3>
+                    <p>Donation Initiative</p>
+                    <span class="sub-role">M&E Lead</span>
+                </div>
+                <div class="team-card blue-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-users"></i></div>
+                    <h3>N. Ahmed</h3>
+                    <p>Social Affairs</p>
+                    <span class="sub-role">Lead & Deputy English</span>
+                </div>
+            </div>
+
+            <h3 class="category-subtitle title-creative"><i class="fas fa-microphone-lines"></i> قطاع البودكاست والإنتاج الإبداعي</h3>
+            <div class="team-grid">
+                <div class="team-card creative-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-microphone"></i></div>
+                    <h3>M. Yara</h3>
+                    <p>General Sector Lead</p>
+                    <span class="sub-role">English Podcast Lead</span>
+                </div>
+                <div class="team-card creative-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-headset"></i></div>
+                    <h3>Tasneem</h3>
+                    <p>Voice of Tomouh</p>
+                    <span class="sub-role">Voice Acting & Commentary</span>
+                </div>
+                <div class="team-card creative-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-language"></i></div>
+                    <h3>B. Loujain</h3>
+                    <p>French Podcast</p>
+                    <span class="sub-role">Deputy Lead</span>
+                </div>
+                <div class="team-card creative-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-pen-nib"></i></div>
+                    <h3>H. Mohamed Abderrahmane</h3>
+                    <p>Scriptwriting</p>
+                    <span class="sub-role">Lead</span>
+                </div>
+                <div class="team-card creative-tier">
+                    <div class="avatar-placeholder"><i class="fas fa-file-lines"></i></div>
+                    <h3>M. Hidaya</h3>
+                    <p>Scriptwriting</p>
+                    <span class="sub-role">Lead</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section-card">
+            <h2 class="main-title"><i class="fas fa-address-book"></i> قنوات التواصل الرسمية للزوار والمستثمرين</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <h4>البريد الإلكتروني</h4>
+                    <p style="margin-top:5px; font-weight:bold; color:var(--primary-blue);">tomouhpodcast@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-volume"></i>
+                    <h4>الهاتف المباشر</h4>
+                    <p style="margin-top:5px; font-weight:bold; color:var(--primary-blue);" dir="ltr">0549 45 89 15</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-location-dot"></i>
+                    <h4>المقر والنشاط</h4>
+                    <p style="margin-top:5px; font-size:0.9rem;">المركز الترفيهي العلمي، سيدي بلعباس</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p class="footer-slogan">"Let us be the beginning.. and let our ambition be a success story"</p>
+        <p>© 2026 جميع الحقوق محفوظة لنادي طموح - صالون التشغيل والتكوين والمقاولتية</p>
+    </footer>
+
+</body>
+</html>
